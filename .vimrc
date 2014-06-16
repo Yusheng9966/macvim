@@ -5,22 +5,44 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 
-
 " 行号和标尺
 set number
 set ruler
 set rulerformat=%15(%c%V\ %p%%%)
 
-syntax on
-
+"显示匹配的括号
+set showmatch
 
 "在查找时忽略大小写
 set ignorecase
 set incsearch
 set hlsearch
-  
-"显示匹配的括号
-set showmatch
+
+syntax on
+filetype on
+filetype plugin on "ftplugin.vim will load otherwise use ftplugof.vim
+filetype indent on "indent.vim will load
+
+let Tlist_Ctags_Cmd='~/.vim/ctags'
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Auto_Open = 1
+
+function MoveCursorToTaglist()
+    let s:_cur_winnr = winnr()
+    let s:winnum =  bufwinnr(g:TagList_title)
+    if s:_cur_winnr == s:winnum 
+        exe s:_last_winnr . 'wincmd w'
+    else
+        exe s:winnum . 'wincmd w'
+        let s:_last_winnr = s:_cur_winnr
+    endif
+endfunction
+
+map <silent> <leader>tl :TlistToggle<cr>
+map <silent> <F7> :call MoveCursorToTaglist()<cr>
+
 
 " =========
 " 图形界面
