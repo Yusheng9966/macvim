@@ -3,6 +3,8 @@
 " Maintainer:		Tim Pope <vimNOSPAM@tpope.org>
 " Last Change:		2010 May 21
 
+echo '***********************************************************************'
+
 if exists("b:did_ftplugin")
   finish
 endif
@@ -10,12 +12,14 @@ endif
 runtime! ftplugin/html.vim ftplugin/html_*.vim ftplugin/html/*.vim
 unlet! b:did_ftplugin
 
-setlocal comments=fb:*,fb:-,fb:+,n:> commentstring=>\ %s
-setlocal formatoptions+=tcqln
+setlocal comments=b:*,b:-,b:+,n:> commentstring=>\ %s
+setlocal formatoptions+=tcqlnro
+
 setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+
 
 imap <buffer> ### ###<ESC>o---<ESC>kA
 
 let b:undo_ftplugin .= "|setl cms< com< fo<"
+let b:did_ftplugin = 1
 
 " vim:set sw=2:

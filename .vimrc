@@ -42,6 +42,11 @@ endfunction
 
 map <silent> <leader>tl :TlistToggle<cr>
 map <silent> <F7> :call MoveCursorToTaglist()<cr>
+vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py<cr>
+vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py 2<cr>
+vmap <buffer> <C-k><C-c> :!python $HOME/.vim/pycoment.py<cr>
+vmap <buffer> <C-k><C-u> :!python $HOME/.vim/pycoment.py 2<cr>
+
 
 
 " =========
