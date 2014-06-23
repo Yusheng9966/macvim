@@ -29,6 +29,19 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Auto_Open = 1
 
+"将光标在窗口的底和顶移动
+function MoveCursorToTopBottm()
+    let s:cur_line=line(".")
+    let s:top_line = line("w0")
+    let s:bottom_line = line("w$")
+    if s:cur_line != s:bottom_line 
+        exe "normal" (s:bottom_line - s:cur_line)."j"
+    else
+        exe "normal" (s:cur_line-s:top_line)."k"
+    endif
+endfunction
+
+"将光标移动到Taglist窗口
 function MoveCursorToTaglist()
     let s:_cur_winnr = winnr()
     let s:winnum =  bufwinnr(g:TagList_title)
@@ -40,13 +53,23 @@ function MoveCursorToTaglist()
     endif
 endfunction
 
+function MyRun()
+    exe "w"
+    if &filetype == "markdown"
+        "exe "!$HOME/.vim/markdown.pl --html4tags % > %.html &"
+        "exe "!open %.html &"
+        exe "!open -a /Applications/Google\\ Chrome.app %"
+    endif
+endfunction
+
 map <silent> <leader>tl :TlistToggle<cr>
 map <silent> <F7> :call MoveCursorToTaglist()<cr>
+"将选中行注释和取消注释
 vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py<cr>
 vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py 2<cr>
-vmap <buffer> <C-k><C-c> :!python $HOME/.vim/pycoment.py<cr>
-vmap <buffer> <C-k><C-u> :!python $HOME/.vim/pycoment.py 2<cr>
-
+"将光标移动到窗口顶部和底部
+nmap <space> :call MoveCursorToTopBottm()<cr>
+nmap <leader>rr :call MyRun()<cr>
 
 
 " =========
@@ -92,8 +115,7 @@ if has('gui_running')
         " MacVim 下的字体配置
         set guifont=Menlo:h14
         set guifontwide=Hei:h12
-        " 半透明和窗口大小
-        set transparency=2
+        " 半透明和窗口大小 set transparency=2
         set lines=40 columns=110
   
         " 使用MacVim原生的全屏幕功能
