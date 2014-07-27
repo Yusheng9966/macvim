@@ -17,6 +17,7 @@ set showmatch
 set ignorecase
 set incsearch
 set hlsearch
+set fdm=indent "设置缩进折叠方式
 
 syntax on
 filetype on
@@ -62,11 +63,20 @@ function MyRun()
     endif
 endfunction
 
+function MyComent()
+    exe !python $HOME/.vim/pycomment.py html<cr>
+endfunction
+
 map <silent> <leader>tl :TlistToggle<cr>
 map <silent> <F7> :call MoveCursorToTaglist()<cr>
 "将选中行注释和取消注释
-vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py<cr>
-vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py 2<cr>
+
+autocmd FileType c,cpp vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py c<cr>
+autocmd FileType c,cpp vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py c 2<cr>
+
+autocmd FileType xhtml vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py html<cr>
+autocmd FileType xhtml vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py html 2<cr>
+
 "将光标移动到窗口顶部和底部
 nmap <space> :call MoveCursorToTopBottm()<cr>
 nmap <leader>rr :call MyRun()<cr>
