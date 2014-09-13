@@ -17,7 +17,7 @@ set showmatch
 set ignorecase
 set incsearch
 set hlsearch
-set fdm=indent "设置缩进折叠方式
+"set fdm=indent "设置缩进折叠方式
 
 syntax on
 filetype on
@@ -56,7 +56,7 @@ endfunction
 
 function MyRun()
     exe "w"
-    if &filetype == "markdown"
+    if &filetype == "markdown" || &filetype == "xhtml"
         "exe "!$HOME/.vim/markdown.pl --html4tags % > %.html &"
         "exe "!open %.html &"
         exe "!open -a /Applications/Google\\ Chrome.app %"
@@ -90,12 +90,13 @@ if has('gui_running')
     set guioptions=mcr
   
     " 高亮光标所在的行
-    set cursorline
+    "set cursorline
   
     " 编辑器配色
     "colorscheme zenburn
     "colorscheme dusk
-    colorscheme desert
+    "colorscheme desert
+    colorscheme mycolors
   
     if has("win32")
         " Windows 兼容配置
@@ -123,8 +124,8 @@ if has('gui_running')
   
     if has("gui_macvim")
         " MacVim 下的字体配置
-        set guifont=Menlo:h14
-        set guifontwide=Hei:h12
+        set guifont=Menlo:Regular:h11
+        "set guifontwide=Hei:h12
         " 半透明和窗口大小 set transparency=2
         set lines=40 columns=110
   
@@ -171,3 +172,6 @@ if has('gui_running')
  
     endif
 endif
+
+" 取消加粗
+hi Statement gui=NONE   
