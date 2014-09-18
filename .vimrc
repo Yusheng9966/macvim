@@ -77,6 +77,7 @@ autocmd FileType c,cpp vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py 
 autocmd FileType xhtml vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py html<cr>
 autocmd FileType xhtml vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py html 2<cr>
 
+au BufRead *.py map <buffer> <leader>\ :w<CR>:!python %<CR>
 "将光标移动到窗口顶部和底部
 nmap <space> :call MoveCursorToTopBottm()<cr>
 nmap <leader>rr :call MyRun()<cr>
